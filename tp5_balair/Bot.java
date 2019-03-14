@@ -21,6 +21,10 @@ import java.util.stream.*;
 
 import org.json.*;
 import java.time.*;
+import java.text.*;
+
+import net.dv8tion.jda.core.EmbedBuilder;
+import java.awt.Color;
 
 public class Bot extends ListenerAdapter{
   String BOT_PREFIX = "/b1";
@@ -83,18 +87,36 @@ public class Bot extends ListenerAdapter{
           conn.disconnect();
           JSONObject jsMeteo = new JSONObject(result);
           String ville = jsMeteo.getString("name");
-          System.out.println(ville);
+
+          NumberFormat nf = new DecimalFormat("00");
+          DecimalFormat df = new DecimalFormat(".##");
           double temp = jsMeteo.getJSONObject("main").getInt("temp") - 273.15;
-          System.out.println(temp);
-          int lever = jsMeteo.getJSONObject("sys").getInt("sunset");
-          System.out.println(lever);
 
-          int coucher = jsMeteo.getJSONObject("sys").getInt("sunrise");
-          long time = LocalDateTime.ofEpochSecond(time, coucher, ZoneOffset.of("UTC+2"));
-          System.out.println(time);
+          long leverTime = jsMeteo.getJSONObject("sys").getInt("sunset");
+          LocalDateTime timeLever = LocalDateTime.ofEpochSecond(leverTime, 0, ZoneOffset.of("+1"));
+          int leverHour = timeLever.getHour();
+          int leverMinute = timeLever.getMinute();
+          String lever = nf.format(leverHour)+":"+nf.format(leverMinute);
 
-          System.out.println("Ville: "+ville+"\nTempérature: "+temp+"\nlever du soleil: "+lever+"\ncoucher du soleil: "+coucher);
-          //channel.sendMessage(result).queue();
+          long coucherTime = jsMeteo.getJSONObject("sys").getInt("sunrise");
+          LocalDateTime timeCoucher = LocalDateTime.ofEpochSecond(coucherTime, 0, ZoneOffset.of("+1"));
+          int coucherHour = timeCoucher.getHour();
+          int coucherMinutes = timeCoucher.getMinute();
+          String coucher = nf.format(coucherHour)+":"+nf.format(coucherMinutes);
+
+          String villeString = " "+ville;
+          String tempString = " "+ df.format(temp)+"°C";
+          String leverString = " "+lever;
+          String coucherString = " "+coucher;
+
+          EmbedBuilder eb = new EmbedBuilder();
+          eb.setTitle("Météo", null);
+          eb.addField("Ville", villeString, false);
+          eb.addField("Température", tempString, false);
+          eb.addField("Lever du Soleil: ", leverString, false);
+          eb.addField("Coucher du Soleil: ", coucherString, false);
+
+          channel.sendMessage(eb.build()).queue();
         }catch(Exception e){
           System.out.println(e);
         }
