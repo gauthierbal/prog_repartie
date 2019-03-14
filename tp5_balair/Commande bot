@@ -1,0 +1,24 @@
+/b1
+
+
+token NTU0OTM4NzQwMzg5MTgzNDg5.D2j62Q.MughYAX_qNxivMPI9Hc7fqhXt2M
+
+https://cataas.com/cat
+https://cataas.com/cat/cute/says/hello
+
+api key weather: 2b689cc9a8af023d443fd8164d5e8ba3
+
+
+{
+"coord":{"lon":1.87,"lat":50.95},
+"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],
+"base":"stations",
+"main":{"temp":282.1,"pressure":1008,"humidity":66,"temp_min":281.48,"temp_max":282.59},
+"visibility":10000,"wind":{"speed":11.8,"deg":210,"gust":17.5},
+"clouds":{"all":75},
+"dt":1552392906,
+"sys":{"type":1,"id":1233,"message":0.0079,"country":"FR","sunrise":1552371170,"sunset":1552413148},
+"id":6618424,
+"name":"Calais",
+"cod":200
+}
