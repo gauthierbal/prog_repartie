@@ -9,13 +9,13 @@ import net.dv8tion.jda.core.EmbedBuilder;
 import java.nio.charset.*;
 
 public class Meteo{
-  EmbedBuilder eb = new EmbedBuilder();
-  MessageEmbed reponseMeteo(){
+  EmbedBuilder eb;
+  MessageEmbed reponseMeteoVille(String villeAPI){
+    eb = new EmbedBuilder();
     String result= "" ;
     String APIKey = "2b689cc9a8af023d443fd8164d5e8ba3";
     String serv = "http://api.openweathermap.org/data/2.5/weather";
-    String param = "q=Calais&fr&appid=";
-    result = serv+"?"+param+APIKey;
+    String param = "q="+villeAPI+"&fr&appid=";
     try{
       URL url = new URL(serv+"?"+param+APIKey);
       HttpURLConnection conn = (HttpURLConnection) url.openConnection ();
@@ -65,10 +65,14 @@ public class Meteo{
       eb.addField("Coucher du Soleil: ", coucherString, false);
       eb.setImage(imgURL);
 
-      return eb.build();
     }catch(Exception e){
       System.out.println(e);
     }
     return eb.build();
   }
+
+  MessageEmbed reponseMeteo(){
+    return reponseMeteoVille("Calais");
+  }
+
 }

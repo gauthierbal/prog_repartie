@@ -38,33 +38,40 @@ public class Bot extends ListenerAdapter{
     String[] parts = msg.split(" ");
     MessageChannel channel = event.getChannel();
     if (parts[0].equals(BOT_PREFIX)) {
-      if (parts[1].equals("ping")) {
-        channel.sendMessage(ping.reponsePing()).queue();
-      }
-      if (parts[1].equals("dice")) {
-        if (parts.length == 2) {
-          channel.sendMessage(dice.reponseDiceSix()).queue();
-        }else if(parts.length == 3){
-          int n = Integer.parseInt(parts[2]);
-          channel.sendMessage(dice.reponseDice(n)).queue();
-        }
-      }
-      if (parts[1].equals("cat")){
-        if (parts.length == 3) {
-          channel.sendMessage(cat.catReponseText(parts[2])).queue();
-        }else{
-          channel.sendMessage(cat.catReponse()).queue();
-        }
-      }
-      if (parts[1].equals("meteo")) {
-        channel.sendMessage(meteo.reponseMeteo()).queue();
-      }
-      if (parts[1].equals("blague")) {
-        channel.sendMessage(blague.reponseBlague()).queue();
-      }if (parts[1].equals("help")) {
-        channel.sendMessage(help.reponseHelp()).queue();
-      }else{
-        channel.sendMessage("Erreur: faites '/b1 help' pour connaitre les commandes de Bot_Balair").queue();
+      switch(parts[1]){
+          case "ping":
+          channel.sendMessage(ping.reponsePing()).queue();
+          break;
+        case "dice":
+          if (parts.length == 2) {
+            channel.sendMessage(dice.reponseDiceSix()).queue();
+          }else if(parts.length == 3){
+            int n = Integer.parseInt(parts[2]);
+            channel.sendMessage(dice.reponseDice(n)).queue();
+          }
+          break;
+        case "cat":
+          if (parts.length == 3) {
+            channel.sendMessage(cat.catReponseText(parts[2])).queue();
+          }else{
+            channel.sendMessage(cat.catReponse()).queue();
+          }
+          break;
+        case "meteo":
+          if (parts.length == 3) {
+            channel.sendMessage(meteo.reponseMeteoVille(parts[2])).queue();
+          }else{
+            channel.sendMessage(meteo.reponseMeteo()).queue();
+          }
+          break;
+        case "blague":
+          channel.sendMessage(blague.reponseBlague()).queue();
+          break;
+        case "help":
+          channel.sendMessage(help.reponseHelp()).queue();
+          break;
+        default:
+          channel.sendMessage("Erreur: faites '/b1 help' pour connaitre les commandes de Bot_Balair").queue();
       }
     }
   }

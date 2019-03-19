@@ -14,7 +14,7 @@ public class Help{
     eb.setTitle("Liste des commandes de Bot_Balair", null);
     eb.addField("/b1 ping", "Renvoie pong à l'utilisateur", false);
     eb.addField("/b1 dice", "Renvoie un chiffre aléatoire compris entre 0 et 6 à l'utilisateur", false);
-    eb.addField("/b1 dice max", "Renvoie un nombre aléatoire de 0 à max à l'utilisateur", false);
+    eb.addField("/b1 dice <max>", "Renvoie un nombre aléatoire de 0 à max à l'utilisateur", false);
     eb.addField("/b1 cat", "Renvoie une image de chat aléatoire à l'utilisateur", false);
     eb.addField("/b1 cat <Texte>", "Renvoie une image de chat avec le texte pris en paramètre à l'utilisateur", false);
     eb.addField("/b1 meteo", "Renvoie la météo de Calais à l'utilisateur", false);
