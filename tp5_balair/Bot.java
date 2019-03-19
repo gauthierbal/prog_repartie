@@ -15,6 +15,7 @@ public class Bot extends ListenerAdapter{
   Cat cat = new Cat();
   Meteo meteo = new Meteo();
   Blague blague = new Blague();
+  Help help = new Help();
 
   public static void main(String[] args) throws
   LoginException{
@@ -56,10 +57,14 @@ public class Bot extends ListenerAdapter{
         }
       }
       if (parts[1].equals("meteo")) {
-          channel.sendMessage(meteo.reponseMeteo()).queue();
+        channel.sendMessage(meteo.reponseMeteo()).queue();
       }
       if (parts[1].equals("blague")) {
-          channel.sendMessage(blague.reponseBlague()).queue();
+        channel.sendMessage(blague.reponseBlague()).queue();
+      }if (parts[1].equals("help")) {
+        channel.sendMessage(help.reponseHelp()).queue();
+      }else{
+        channel.sendMessage("Erreur: faites '/b1 help' pour connaitre les commandes de Bot_Balair").queue();
       }
     }
   }
